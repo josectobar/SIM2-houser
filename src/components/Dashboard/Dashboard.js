@@ -46,7 +46,7 @@ export default class Dashboard extends Component {
                 <h1>
                     Dashboard
                     <Link
-                        to="/wizard">
+                        to="/wizard/Step1">
                         Add New Property
                     </Link>
                     {houseDisplay}

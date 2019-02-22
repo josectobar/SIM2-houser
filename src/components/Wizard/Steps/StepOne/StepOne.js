@@ -1,8 +1,5 @@
 import React, { Component } from 'react'
-
-//Route links:
 import { Link } from 'react-router-dom'
-import Axios from 'axios';
 
 export default class StepOne extends Component {
     constructor(){
@@ -16,12 +13,7 @@ export default class StepOne extends Component {
         }
     }
 
-    //axios new house request:
-    handleNewHouse = () => {
-        Axios.post('/api/house', this.state).then(() => {
-            this.props.history.push('/')
-        })
-    }
+
 
     handleClearInput = () => {
         this.setState({
@@ -75,10 +67,10 @@ export default class StepOne extends Component {
                     value={this.state.zip_code} 
                     type="number"
                     placeholder="Zip Code"/>
-                <button
-                    onClick={this.handleNewHouse}>
-                    Complete
-                </button>
+                <Link
+                    to="/wizard/Step2">
+                    Next
+                </Link>
             </div>
         )
     }
