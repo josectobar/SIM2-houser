@@ -26,3 +26,18 @@ app.delete('/api/house/:id', ctrl.deleteProperty)
 
 //PORT CONNECTION
 app.listen(PORT, ()=> console.log(`Live at ${PORT}`))
+
+
+// SQL alter steps:
+
+//  ADDING DESIRE MORTGAGE ---------------
+// alter table properties
+// add mortgage_amount numeric(8,2)
+
+//  ADDING DESIRE AMOUNT COLUMN ---------------
+// alter table properties
+// add desire_rent numeric(8,2)
+
+//  ADDING IMAGE COLUMN ---------------
+// alter table properties
+// add img_url varchar(255)
