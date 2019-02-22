@@ -1,20 +1,11 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 
-export default class StepOne extends Component {
-    constructor(){
-        super()
-        this.state = {
-            img_url:``
-        }
-    }
+//Redux
+import { connect } from 'react-redux'
+import { updateImgUrl } from '../../../../ducks/reducer'
 
-    handleUserInput =(event) => {
-        this.setState({
-            [event.target.name]: event.target.value
-        })
-    }
-
+class StepTwo extends Component {
     render(){
         return(
             <div>
@@ -22,9 +13,8 @@ export default class StepOne extends Component {
                     Step Two
                 </h1>
                 <input 
-                    name="img_url" 
-                    onChange={this.handleUserInput} 
-                    value={this.state.img_url} 
+                    onChange={(e) => this.props.updateImgUrl(e.target.value)} 
+                    value={this.props.img_url} 
                     type="text"
                     placeholder="Image URL"/>
                 <Link
@@ -40,3 +30,11 @@ export default class StepOne extends Component {
     }
 
 }
+function mapStateToProps( state ) {
+    const { img_url } = state
+    return {
+        img_url
+    }
+}
+
+export default connect(mapStateToProps, { updateImgUrl } )(StepTwo)

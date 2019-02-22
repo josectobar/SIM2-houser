@@ -2,15 +2,11 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import Axios from 'axios';
 
-export default class StepOne extends Component {
-    constructor(){
-        super()
-        this.state = {
-            mortgage_amount:``,
-            desire_rent: ``
-        }
-    }
+//Redux
+import { connect } from 'react-redux'
+import { updateMortgage, updateRent } from '../../../../ducks/reducer'
 
+class StepThree extends Component {
     //axios new house request:
     handleNewHouse = () => {
         Axios.post('/api/house', this.state).then(() => {
@@ -25,6 +21,8 @@ export default class StepOne extends Component {
     }
 
     render(){
+        const { mortgage_amount, desire_rent } = this.props
+
         return(
             <div>
                 <h1>
@@ -34,15 +32,13 @@ export default class StepOne extends Component {
                     Recommended Rent: 
                 </h4>
                 <input 
-                    name="mortgage_amount" 
-                    onChange={this.handleUserInput} 
-                    value={this.state.mortgage_amount} 
+                    onChange={(e) => this.props.updateMortgage(e.target.value)} 
+                    value={mortgage_amount} 
                     type="number"
                     placeholder="0"/>
                 <input 
-                    name="desire_rent" 
-                    onChange={this.handleUserInput} 
-                    value={this.state.desire_rent} 
+                    onChange={(e) => this.props.updateRent(e.target.value)} 
+                    value={desire_rent} 
                     type="number"
                     placeholder="0"/>
                 <button
@@ -56,5 +52,13 @@ export default class StepOne extends Component {
             </div>
         )
     }
-
 }
+function mapStateToProps( state ) {
+    const { mortgage_amount, desire_rent } = state
+    return {
+        mortgage_amount,
+        desire_rent
+    }
+}
+
+export default connect(mapStateToProps, { updateMortgage, updateRent } )(StepThree)

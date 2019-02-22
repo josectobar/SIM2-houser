@@ -1,12 +1,21 @@
 import React, { Component } from 'react'
 
+//Redux
+import { connect } from 'react-redux'
+import { cancelWizard } from '../../ducks/reducer'
+
 //Route links:
 import { Route, Link, Switch } from 'react-router-dom'
 import StepOne from './Steps/StepOne/StepOne'
 import StepTwo from './Steps/StepTwo/StepTwo'
 import StepThree from './Steps/StepThree/StepThree'
 
-export default class Wizard extends Component {
+class Wizard extends Component {
+
+    handleCancel = () => {
+        this.props.cancelWizard()
+        this.props.history.push('/')
+    }
 
     render(){
 
@@ -20,11 +29,13 @@ export default class Wizard extends Component {
                     <Route path="/wizard/step2" component={StepTwo} />
                     <Route path="/wizard/step3" component={StepThree} />
                 </Switch>
-                <Link
-                    to="/">
+                <button
+                    onClick={() => this.handleCancel()}>
                     Cancel
-                </Link>
+                </button>
             </div>
         )
     }
 }
+
+export default connect(null, { cancelWizard })(Wizard)
