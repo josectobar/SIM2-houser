@@ -24,8 +24,12 @@ export default class Dashboard extends Component {
             this.setState({
                 houses:houses
             })
-            console.log(this.state);
-            
+        })
+    }
+
+    deleteHouse = (id) => {
+        axios.delete(`/api/house/${id}`).then(() => {
+            this.getHouses()
         })
     }
     
@@ -33,7 +37,7 @@ export default class Dashboard extends Component {
         const houseDisplay = this.state.houses.map(house => {
             return(
                 <div key ={house.id}>
-                    <House />
+                    <House house={house} deleteHouseFn={this.deleteHouse} />
                 </div>
             )
         })

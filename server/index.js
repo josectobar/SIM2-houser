@@ -21,6 +21,8 @@ massive(CONNECTION_STRING).then(db => {
 //endpoints:
 
 app.get('/api/houses', ctrl.getProperties)
+app.post('/api/house', ctrl.addProperty)
+app.delete('/api/house/:id', ctrl.deleteProperty)
 
 //PORT CONNECTION
 app.listen(PORT, ()=> console.log(`Live at ${PORT}`))
