@@ -15,7 +15,7 @@ export default function House(props) {
                 <p>State: {state}</p>
                 <p>Zip code: {zip_code}</p>
                 <p>Monthly mortgage: {mortgage_amount}</p>
-                <p>Desire Rent: {desire_rent}</p>
+                <p>Desired Rent: {desire_rent}</p>
                 <img src={img_url} alt={name} />
             </div>
         )
