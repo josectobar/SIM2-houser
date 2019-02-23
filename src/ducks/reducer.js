@@ -2,98 +2,61 @@ const initialState = {
     name: ``,
     address: ``,
     city: ``,
-    state: ``,
+    uState: ``,
     zip_code: ``,
-    img_url:``,
     mortgage_amount:``,
-    desire_rent: ``
+    desire_rent: ``,
+    img_url:``
 }
 
-const UPDATE_NAME = 'UPDATE_NAME'
-const UPDATE_ADDRESS = 'UPDATE_ADDRESS'
-const UPDATE_CITY = 'UPDATE_CITY'
-const UPDATE_STATE = 'UPDATE_STATE'
-const UPDATE_ZIP_CODE = 'UPDATE_ZIP_CODE'
+const UPDATE_STEP_ONE = 'UPDATE_STEP_ONE'
 const UPDATE_IMG_URL = 'UPDATE_IMG_URL'
-const UPDATE_MORTGAGE = 'UPDATE_MORTGAGE'
-const UPDATE_RENT = 'UPDATE_RENT'
+const UPDATE_STEP_THREE = 'UPDATE_STEP_THREE'
 const CANCEL_WIZARD = 'CANCEL_WIZARD'
 
 export default function reducer(state=initialState, action) {
     switch(action.type) {
-        case UPDATE_NAME:
+        case UPDATE_STEP_ONE:
         
-        return {...state, name: action.payload}
-        case UPDATE_ADDRESS:
-        return {...state, address: action.payload}
-        case UPDATE_CITY:
-        return {...state, city: action.payload}
-        case UPDATE_STATE:
-        return {...state, state: action.payload}
-        case UPDATE_ZIP_CODE:
-        return {...state, zip_code: action.payload}
-        case UPDATE_IMG_URL:
+        const { name, address, city, uState, zip_code } = action.payload
+        return {...state, name, address, city, uState, zip_code}
+
+        case UPDATE_IMG_URL:;
         return {...state, img_url: action.payload}
-        case UPDATE_MORTGAGE:
-        return {...state, mortgage_amount: action.payload}
-        case UPDATE_RENT:
-        return {...state, desire_rent: action.payload}
+
+        case UPDATE_STEP_THREE:
+        const { mortgage_amount, desire_rent } = action.payload
+        return {...state, mortgage_amount, desire_rent }
+
         case CANCEL_WIZARD:
         return action.payload
+
         default:
         return state
     }
 }
 
-export function updateName(name) {
+export function updateStepOne(stepOneState) {
     return {
-        type: UPDATE_NAME,
-        payload: name
+        type: UPDATE_STEP_ONE,
+        payload: stepOneState
     }
 }
 
-export function updateAddress(address) {
+export function updateStepThree(stepThreeState) {
     return {
-        type: UPDATE_ADDRESS,
-        payload: address
+        type: UPDATE_STEP_THREE,
+        payload: stepThreeState
     }
 }
-export function updateCity(city) {
-    return {
-        type: UPDATE_CITY,
-        payload: city
-    }
-}
-export function updateState(uState) {
-    return {
-        type: UPDATE_STATE,
-        payload: uState
-    }
-}
-export function updateZipCode(zip_code) {
-    return {
-        type: UPDATE_ZIP_CODE,
-        payload: zip_code
-    }
-}
+
 export function updateImgUrl(img_url) {
     return {
         type: UPDATE_IMG_URL,
         payload: img_url
     }
 }
-export function updateMortgage(mortgage_amount) {
-    return {
-        type: UPDATE_MORTGAGE,
-        payload: mortgage_amount
-    }
-}
-export function updateRent(desire_rent) {
-    return {
-        type: UPDATE_RENT,
-        payload: desire_rent
-    }
-}
+
 export function cancelWizard() {
     return {
         type: CANCEL_WIZARD,

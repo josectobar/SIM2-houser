@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { cancelWizard } from '../../ducks/reducer'
 
 //Route links:
-import { Route, Link, Switch } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 import StepOne from './Steps/StepOne/StepOne'
 import StepTwo from './Steps/StepTwo/StepTwo'
 import StepThree from './Steps/StepThree/StepThree'

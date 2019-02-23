@@ -8,10 +8,11 @@ module.exports = {
     },
     addProperty: (req, res) => {
         const db = req.app.get('db')
-        const { name, address, city, state, zip_code } = req.body
-        db.add_property(name, address, city, state, parseInt(zip_code)).then(response => {
+        const { name, address, city, uState, zip_code, mortgage_amount, desire_rent, img_url } = req.body
+        console.log(req.body);
+        db.add_property(name, address, city, uState, zip_code, mortgage_amount, desire_rent, img_url).then(response => {
             res.status(200).send(response)
-        }).catch(err => res.status(500).send(`There was a problem with the add request: ${err}`))
+        }).catch(err => {console.log(err), res.status(500).send(`There was a problem with the add request: ${err}`)})
     },
     deleteProperty: (req, res) => {
         const db = req.app.get('db')

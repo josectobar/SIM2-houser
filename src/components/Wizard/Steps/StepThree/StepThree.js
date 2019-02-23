@@ -4,12 +4,32 @@ import Axios from 'axios';
 
 //Redux
 import { connect } from 'react-redux'
-import { updateMortgage, updateRent } from '../../../../ducks/reducer'
+import { updateStepThree, cancelWizard } from '../../../../ducks/reducer'
 
 class StepThree extends Component {
+    constructor(){
+        super()
+        this.state = {
+            mortgage_amount:``,
+            desire_rent: ``
+        }
+    }
+
+    componentDidMount(){
+        const { mortgage_amount, desire_rent } = this.props
+        this.setState({
+            mortgage_amount,
+            desire_rent
+        })
+    }
+
     //axios new house request:
     handleNewHouse = () => {
-        Axios.post('/api/house', this.state).then(() => {
+        const { name, address, city, uState, zip_code, img_url } = this.props
+        
+        const {mortgage_amount, desire_rent } = this.state
+        Axios.post('/api/house', {name, address, city, uState, zip_code, mortgage_amount, desire_rent, img_url}).then(() => {
+            this.props.cancelWizard()
             this.props.history.push('/')
         })
     }
@@ -21,7 +41,7 @@ class StepThree extends Component {
     }
 
     render(){
-        const { mortgage_amount, desire_rent } = this.props
+        const { mortgage_amount, desire_rent } = this.state
 
         return(
             <div>
@@ -32,12 +52,14 @@ class StepThree extends Component {
                     Recommended Rent: 
                 </h4>
                 <input 
-                    onChange={(e) => this.props.updateMortgage(e.target.value)} 
+                    name="mortgage_amount"
+                    onChange={this.handleUserInput} 
                     value={mortgage_amount} 
                     type="number"
                     placeholder="0"/>
                 <input 
-                    onChange={(e) => this.props.updateRent(e.target.value)} 
+                    name="desire_rent"
+                    onChange={this.handleUserInput} 
                     value={desire_rent} 
                     type="number"
                     placeholder="0"/>
@@ -54,11 +76,18 @@ class StepThree extends Component {
     }
 }
 function mapStateToProps( state ) {
-    const { mortgage_amount, desire_rent } = state
+    const { name, address, city, uState, zip_code, mortgage_amount, desire_rent, img_url } = state
+
     return {
+        name,
+        address,
+        city,
+        uState,
+        zip_code,
         mortgage_amount,
-        desire_rent
+        desire_rent,
+        img_url
     }
 }
 
-export default connect(mapStateToProps, { updateMortgage, updateRent } )(StepThree)
+export default connect(mapStateToProps, { updateStepThree, cancelWizard } )(StepThree)

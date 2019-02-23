@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
+import React from 'react'
 
 export default function House(props) {
-    const { id, name, address, city, state, zip_code } = props.house
+    const { id, name, address, city, state, zip_code, mortgage_amount, desire_rent, img_url } = props.house
     
         return(
             <div>
@@ -13,7 +13,10 @@ export default function House(props) {
                 <p>Address: {address}</p>
                 <p>City: {city}</p>
                 <p>State: {state}</p>
-                <p>Zip: {zip_code}</p>
+                <p>Zip code: {zip_code}</p>
+                <p>Monthly mortgage: {mortgage_amount}</p>
+                <p>Desire Rent: {desire_rent}</p>
+                <img src={img_url} alt={name} />
             </div>
         )
 }
